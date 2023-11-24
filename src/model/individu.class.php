@@ -4,6 +4,5 @@ class Individu{    // Classe de composition pour les classes Usager et Medecin (
     private string $_nom
     private string $_prenom
     private int $_id;
-    private boolean $_estMedecin;
 }
 ?>
