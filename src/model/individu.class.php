@@ -6,9 +6,9 @@ class Individu{    // Classe de composition pour les classes Usager et Medecin (
     private int $_id;
 
     public function __construct($_nom,$_prenom,$_civilite){
-        $this->$_nom = $_nom;
-        $this->$_prenom = $_prenom;
-        $this->$_civilite = $_civilite;
+        $this->_nom = $_nom;
+        $this->_prenom = $_prenom;
+        $this->_civilite = $_civilite;
     }
 
     public function getCivilite(): Civilite{
