@@ -8,9 +8,5 @@ class Medecin{
         $this->$_id = $_id;
     }
 
-    public function getMedecin(): Usager
-    {
-        return $this->_medecin;
-    }
 }
 ?>
