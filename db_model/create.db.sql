@@ -1,5 +1,5 @@
 CREATE TABLE Individu(
-                         Id_Individu COUNTER,
+                         Id_Individu INT AUTO_INCREMENT,
                          nom VARCHAR(50),
                          prenom VARCHAR(50),
                          civilite VARCHAR(50),
@@ -7,14 +7,14 @@ CREATE TABLE Individu(
 );
 
 CREATE TABLE Médecin(
-                        Id COUNTER,
+                        Id INT AUTO_INCREMENT,
                         Id_Individu INT NOT NULL,
                         PRIMARY KEY(Id),
                         FOREIGN KEY(Id_Individu) REFERENCES Individu(Id_Individu)
 );
 
 CREATE TABLE Usager(
-                       Id_Usager COUNTER,
+                       Id_Usager INT AUTO_INCREMENT,
                        adresse VARCHAR(50),
                        dateNaissance DATE,
                        lieuNaissance VARCHAR(50),
@@ -27,7 +27,7 @@ CREATE TABLE Usager(
 );
 
 CREATE TABLE RendezVous(
-                           Id_RendezVous COUNTER,
+                           Id_RendezVous INT AUTO_INCREMENT,
                            dateHeureRDV DATETIME,
                            dureeMinutes INT,
                            Id INT NOT NULL,
