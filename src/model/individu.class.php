@@ -11,19 +11,19 @@ class Individu{    // Classe de composition pour les classes Usager et Medecin (
         $this->_civilite = $_civilite;
     }
 
-    public function getCivilite(): Civilite{
+    public function getCivilite(): Civilite {
         return $this->_civilite;
     }
 
-    public function getNom(): string{
+    public function getNom(): string {
         return $this->_nom;
     }
 
-    public function getPrenom(): string{
+    public function getPrenom(): string {
         return $this->_prenom;
     }
 
-    public function getId(): int{
+    public function getId(): int {
         return $this->_id;
     }
 }

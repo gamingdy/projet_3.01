@@ -15,6 +15,22 @@ class Usager extends Individu {
         $this->$_lieuNaissance = $_lieuNaissance;
         $this->$_securiteSociale = $_securiteSociale;
     }
+    
+    public function getAdresse(): string {
+        return $this->_adresse;
+    }
+    
+    public function getDateNaissance(): datetime {
+        return $this->_dateNaissance;
+    }
+    
+    public function getLieuNaissance(): string {
+        return $this->_lieuNaissance;
+    }
+    
+    public function getSecuriteSociale(): int {
+        return $this->_securiteSociale;
+    }
 
 }
 
