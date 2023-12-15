@@ -8,6 +8,7 @@ COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
 RUN a2enconf z-app
 
 RUN apt update && apt upgrade -y
+RUN apt install git -y
 
 RUN composer install
 
