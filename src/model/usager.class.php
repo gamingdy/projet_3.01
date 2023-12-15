@@ -32,5 +32,13 @@ class Usager extends Individu {
         return $this->_securiteSociale;
     }
 
+    public function getMedecinReferent(): Medecin {
+        return $this->_medecinReferent;
+    }
+
+    public function setMedecinReferent(Medecin $_medecinReferent): void {
+        $this->_medecinReferent = $_medecinReferent;
+    }
+
 }
 
