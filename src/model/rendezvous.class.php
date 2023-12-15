@@ -4,9 +4,9 @@
         private Medecin $_medecin;
         private datetime $_dateHeureRDV;
         private int $_dureeMinutes = 30;
-    }
+    
 
-    public function __construct($_usager, $_medecin) {
+    public function __construct($_usager, $_medecin, $_dateHeureRDV, $_dureeMinutes) {
         $this->$_dateHeureRDV = $_dateHeureRDV;
         $this->$_dureeMinutes = $_dureeMinutes;
     }
@@ -26,5 +26,5 @@
     public function getMedecin(): int {
         return $this->_medecin;
     }
-
+    }
 ?>
