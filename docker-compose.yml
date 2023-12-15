@@ -7,3 +7,18 @@ services:
       - "80:80"
     volumes:
         - ./src:/app/src
+
+  db:
+    image: mariadb
+    container_name: db_project
+    restart: always
+    volumes:
+      - ./db_model/create.db.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - .env.db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
