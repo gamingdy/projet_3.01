@@ -9,6 +9,7 @@ RUN a2enconf z-app
 
 RUN apt update && apt upgrade -y
 RUN apt install git -y
+RUN docker-php-ext-install pdo pdo_mysql
 
 RUN composer install
 
