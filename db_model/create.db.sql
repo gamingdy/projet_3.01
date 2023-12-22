@@ -1,40 +1,57 @@
-USE php_project;
-
-CREATE TABLE IF NOT EXISTS Individu(
-    Id_Individu INT AUTO_INCREMENT,
-    nom VARCHAR(50),
-    prenom VARCHAR(50),
+CREATE TABLE IF NOT EXISTS individu (
+    id       INT AUTO_INCREMENT,
+    nom      VARCHAR(50),
+    prenom   VARCHAR(50),
     civilite VARCHAR(50),
-    PRIMARY KEY(Id_Individu)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS Médecin(
-    Id INT AUTO_INCREMENT,
-    Id_Individu INT NOT NULL,
-    PRIMARY KEY(Id),
-    FOREIGN KEY(Id_Individu) REFERENCES Individu(Id_Individu)
+CREATE TABLE IF NOT EXISTS medecin (
+    id          INT AUTO_INCREMENT,
+    id_individu INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_individu) REFERENCES individu (id)
 );
 
-CREATE TABLE IF NOT EXISTS Usager(
-    Id_Usager INT AUTO_INCREMENT,
-    adresse VARCHAR(50),
-    dateNaissance DATE,
-    lieuNaissance VARCHAR(50),
-    securiteSociale VARCHAR(13),
-    Id INT NOT NULL,
-    Id_Individu INT NOT NULL,
-    PRIMARY KEY(Id_Usager),
-    FOREIGN KEY(Id) REFERENCES Médecin(Id),
-    FOREIGN KEY(Id_Individu) REFERENCES Individu(Id_Individu)
+CREATE TABLE IF NOT EXISTS usager (
+    id              INT AUTO_INCREMENT,
+    adresse         VARCHAR(50),
+    datenaissance   DATE,
+    lieunaissance   VARCHAR(50),
+    securitesociale VARCHAR(13),
+    id_medecin      INT,
+    id_individu     INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_medecin) REFERENCES medecin (id),
+    FOREIGN KEY (id_individu) REFERENCES individu (id)
 );
 
-CREATE TABLE IF NOT EXISTS RendezVous(
-    Id_RendezVous INT AUTO_INCREMENT,
-    dateHeureRDV DATETIME,
-    dureeMinutes INT,
-    Id INT NOT NULL,
-    Id_Usager INT NOT NULL,
-    PRIMARY KEY(Id_RendezVous),
-    FOREIGN KEY(Id) REFERENCES Médecin(Id),
-    FOREIGN KEY(Id_Usager) REFERENCES Usager(Id_Usager)
+CREATE TABLE IF NOT EXISTS rendezvous (
+    id           INT AUTO_INCREMENT,
+    dateheurerdv DATETIME,
+    dureeminutes INT,
+    id_medecin   INT NOT NULL,
+    id_usager    INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_medecin) REFERENCES medecin (id),
+    FOREIGN KEY (id_usager) REFERENCES usager (id)
 );
+COMMIT;
+
+INSERT INTO individu(nom, prenom, civilite)
+VALUES ('Doe', 'John', 'M');
+
+INSERT INTO individu(nom, prenom, civilite)
+VALUES ('Doe', 'Jane', 'Mme');
+
+INSERT INTO individu(nom, prenom, civilite)
+VALUES ('Doe', 'Jack', 'M');
+
+INSERT INTO medecin(id_individu)
+VALUES (1);
+
+INSERT INTO usager(adresse, datenaissance, lieunaissance, securitesociale, id_medecin, id_individu)
+VALUES ('1 rue de la paix', '1990-01-01', 'Paris', '1234567890123', 1, 2);
+
+INSERT INTO usager(adresse, datenaissance, lieunaissance, securitesociale, id_medecin, id_individu)
+VALUES ('2 rue de la paix', '1990-01-01', 'Paris', '1234567890123', NULL, 3);
