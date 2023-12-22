@@ -1,6 +1,17 @@
 <?php
-    enum Civilite {
-        case M;
-        case Mme;
+    enum Civilite: string
+    {
+        case M="M";
+        case Mme = "Mme";
+
+        public static function fromString(string $name): ?Civilite{
+            foreach (Civilite::cases() as $value) {
+                if ($value->value === $name) {
+                    return $value;
+                }
+            }
+            return null;
+
+        }
+
     }
-?>
