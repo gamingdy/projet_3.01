@@ -7,6 +7,7 @@ services:
       - "80:80"
     volumes:
         - ./src:/app/src
+        - .env:/app/.env
 
   db:
     image: mariadb
@@ -16,6 +17,8 @@ services:
       - ./db_model/create.db.sql:/docker-entrypoint-initdb.d/init.sql
     env_file:
       - .env.db
+    ports:
+      - "3306:3306"
 
   adminer:
     image: adminer
