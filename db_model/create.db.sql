@@ -55,3 +55,6 @@ VALUES ('1 rue de la paix', '1990-01-01', 'Paris', '1234567890123', 1, 2);
 
 INSERT INTO usager(adresse, datenaissance, lieunaissance, securitesociale, id_medecin, id_individu)
 VALUES ('2 rue de la paix', '1990-01-01', 'Paris', '1234567890123', NULL, 3);
+
+INSERT INTO rendezvous(dateheurerdv, dureeminutes, id_medecin, id_usager)
+VALUES ('01/01/2024 10:00:00', 30, 1, 2);
