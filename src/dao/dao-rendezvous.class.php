@@ -69,11 +69,13 @@ class DaoRendezVous{
 
 
     public function addRendezVous (RendezVous $_rendezvous): int {
-        $sql = "INSERT INTO rendezvous (date,heure,id_individu) VALUES (:date,:heure,:id_individu)";
+        $sql = "INSERT INTO rendezvous (date_rdv,heure_debut,dureeminutes,id_medecin,id_usager) VALUES (:date,:heure,:duree,:id_medecin,:id_usager)";
         $stmt = $this->_pdo->prepare($sql);
-        $stmt->bindValue(':date', $_rendezvous->getDate());
-        $stmt->bindValue(':heure', $_rendezvous->getHeure());
-        $stmt->bindValue(':id_individu', $_rendezvous->getIdIndividu());
+        $stmt->bindValue(':date', $_rendezvous->getDateRDV());
+        $stmt->bindValue(':heure', $_rendezvous->getHeureRDV());
+        $stmt->bindValue(':duree', $_rendezvous->getDureeMinutes());
+        $stmt->bindValue(':id_medecin', $_rendezvous->getMedecin()->getId());
+        $stmt->bindValue(':id_usager', $_rendezvous->getUsager()->getId());
         $stmt->execute();
         return $this->_pdo->lastInsertId();
     }
@@ -88,5 +90,14 @@ class DaoRendezVous{
             $rendezvous[] = $this->createRdv($row);
         }
         return $rendezvous;
+    }
+
+    private function createRdv ($row): RendezVous {
+        $usager = $this->_daoUsager->getUsager($row['id_usager']);
+        $medecin = $this->_daoMedecin->getMedecin($row['id_medecin']);
+        $dateRDV = $row['date_rdv'];
+        $heureRDV = $row['heure_debut'];
+        $dureeMinutes = $row['dureeminutes'];
+        return new RendezVous($usager, $medecin, $dateRDV, $heureRDV, $dureeMinutes);
     }
 }

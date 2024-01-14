@@ -7,19 +7,25 @@ class RendezVous{
     private int $id;
     private Usager $_usager;
     private Medecin $_medecin;
-    private string $_dateHeureRDV;
+    private string $_dateRDV;
+    private string $_heureRDV;
     private int $_dureeMinutes = 30;
 
 
-    public function __construct ($_usager, $_medecin, $_dateHeureRDV, $_dureeMinutes) {
+    public function __construct ($_usager, $_medecin, $_dateRDV, $_heureRDV, $_dureeMinutes) {
         $this->_usager = $_usager;
         $this->_medecin = $_medecin;
-        $this->_dateHeureRDV = $_dateHeureRDV;
+        $this->_dateRDV = $_dateRDV;
+        $this->_heureRDV = $_heureRDV;
         $this->_dureeMinutes = $_dureeMinutes;
     }
 
-    public function getDateHeureRDV (): string {
-        return $this->_dateHeureRDV;
+    public function getDateRDV (): string {
+        return $this->_dateRDV;
+    }
+
+    public function getHeureRDV (): string {
+        return $this->_heureRDV;
     }
 
     public function getDureeMinutes (): int {
