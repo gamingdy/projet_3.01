@@ -5,7 +5,6 @@ require_once 'dao-usager.class.php';
 require_once 'dao-medecin.class.php';
 
 require_once __DIR__ . '/../model/rendezvous.class.php';
-require_once __DIR__ . '/../model/usager.class.php';
 
 class DaoRendezVous{
     private PDO $_pdo;
@@ -55,13 +54,19 @@ class DaoRendezVous{
         return $this->rendezVousMedecinUsager($sql, $_id);
     }
 
-    private function createRdv ($row): RendezVous {
-        $usager = $this->_daoUsager->getUsager($row['id_usager']);
-        $medecin = $this->_daoMedecin->getMedecin($row['id_medecin']);
-        $dateHeureRDV = $row['dateheurerdv'];
-        $dureeMinutes = $row['dureeminutes'];
-        return new RendezVous($usager, $medecin, $dateHeureRDV, $dureeMinutes);
+    public function getRendezVousbyDate (string $_date): array {
+        $sql = "SELECT * FROM rendezvous WHERE date_rdv = :date";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':date', $_date);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rendezvous = [];
+        foreach ($rows as $row) {
+            $rendezvous[] = $this->createRdv($row);
+        }
+        return $rendezvous;
     }
+
 
     public function addRendezVous (RendezVous $_rendezvous): int {
         $sql = "INSERT INTO rendezvous (date,heure,id_individu) VALUES (:date,:heure,:id_individu)";
