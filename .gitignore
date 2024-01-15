@@ -1,5 +1,7 @@
 .idea
 vendor
 
+templates_c
+
 *.iml
 *.lo1

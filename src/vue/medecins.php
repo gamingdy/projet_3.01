@@ -10,27 +10,15 @@ require_once __DIR__ . '/../model/civilite.class.php';
 $daoMedecin = new DaoMedecin();
 $medecins = $daoMedecin->getMedecins();
 
+
 //create template object
-$t = new HTML_Template_PHPLIB(__DIR__ . '/../template', 'keep');
+$t = new Smarty();
+$t->setTemplateDir(__DIR__ . '/../template/');
 //load file
-$t->setFile('individu', 'list-usager.tpl');
-//set block
-$t->setBlock('individu', 'individu_card', 'individu_ref');
-
-//set some variables
-$t->setVar('PAGE_TITLE', 'Code authors as of ' . date('Y-m-d'));
-
-//display the authors
-foreach ($medecins as $medecin) {
-    if ($medecin->getCivilite() == Civilite::M) {
-        $t->setVar('INDIVIDU_SEXE', 'homme');
-    } else {
-        $t->setVar('INDIVIDU_SEXE', 'femme');
-    }
-    $t->setVar('INDIVIDU_NAME', $medecin->getNom());
-    $t->setVar('INDIVIDU_PRENOM', $medecin->getPrenom());
-    $t->parse('individu_ref', 'individu_card', true);
-}
+$t->assign('titre', 'Liste des médecins');
+$t->assign('individus', $medecins);
+$t->assign('is_usager', false);
 
 //finish and echo
-echo $t->finish($t->parse('OUT', 'individu'));
+//$t->display(__DIR__ . '/../template/list-individu.tpl');
+$t->display('list-individu.tpl');
