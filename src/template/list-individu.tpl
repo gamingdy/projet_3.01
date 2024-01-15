@@ -23,7 +23,11 @@
             <p>Adresse : {$individu->getAdresse()}</p>
             <p> Sécurité sociale : {$individu->getSecuriteSociale()}</p>
             <p> Date de naissance: {$individu->getDateNaissance()} </p>
+            <a href="/usager.php?id={$individu->getId()}">Voir</a>
+        {else}
+            <a href="/medecin.php?id={$individu->getId()}">Voir</a>
         {/if}
+
 
     </div>
 {/foreach}
