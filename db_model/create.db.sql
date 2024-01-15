@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS usager (
     id_medecin      INT,
     id_individu     INT NOT NULL,
     PRIMARY KEY (id),
+    UNIQUE KEY unique_securite (securitesociale),
     FOREIGN KEY (id_medecin) REFERENCES medecin (id),
     FOREIGN KEY (id_individu) REFERENCES individu (id)
 );
