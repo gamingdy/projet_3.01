@@ -10,6 +10,8 @@ RUN a2enconf z-app
 RUN apt update && apt upgrade -y
 RUN apt install git unzip -y
 RUN docker-php-ext-install pdo pdo_mysql
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
+RUN set -eux
 RUN composer install
 
