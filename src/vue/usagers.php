@@ -11,13 +11,13 @@ $usager = $daoUsager->getUsagers();
 
 
 //create template object
-$t = new Smarty();
-$t->setTemplateDir(__DIR__ . '/../template/');
+$template = new Smarty();
+$template->setTemplateDir(__DIR__ . '/../template/');
 //load file
-$t->assign('titre', 'Liste des usagers');
-$t->assign('individus', $usager);
-$t->assign('is_usager', true);
+$template->assign('titre', 'Liste des usagers');
+$template->assign('individus', $usager);
+$template->assign('is_usager', true);
 
 //finish and echo
 //$t->display(__DIR__ . '/../template/list-individu.tpl');
-$t->display('list-individu.tpl');
+$template->display('list-individu.tpl');
