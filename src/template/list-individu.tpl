@@ -1,6 +1,12 @@
-<html>
-<head></head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Usagers</title>
+    <link rel="stylesheet" href="style/list-usager.css">
+</head>
 <body>
+
+<p>Voici la liste des usagers</p>
 <!-- BEGIN individu_card -->
 <div class="card">
 
