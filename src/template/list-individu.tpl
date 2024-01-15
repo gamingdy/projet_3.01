@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style/list-usager.css">
 </head>
 <body>
-
+{include 'header.html'}
 
 {foreach $individus as $individu}
     <div class="card">

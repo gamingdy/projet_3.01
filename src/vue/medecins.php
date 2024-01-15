@@ -2,7 +2,6 @@
 //we want to display this author list
 
 require __DIR__ . '/../../vendor/autoload.php';
-require_once 'HTML/Template/PHPLIB.php';
 
 require_once __DIR__ . '/../dao/dao-usager.class.php';
 require_once __DIR__ . '/../model/civilite.class.php';

@@ -9,7 +9,7 @@ class RendezVous{
     private Medecin $_medecin;
     private string $_dateRDV;
     private string $_heureRDV;
-    private int $_dureeMinutes = 30;
+    private int $_dureeMinutes;
 
 
     public function __construct ($_usager, $_medecin, $_dateRDV, $_heureRDV, $_dureeMinutes) {
