@@ -13,7 +13,7 @@ $usagers = $daoUsager->getUsagers();
 //create template object
 $t = new HTML_Template_PHPLIB(__DIR__ . '/../template', 'keep');
 //load file
-$t->setFile('individu', 'list-individu.tpl');
+$t->setFile('individu', 'list-usager.tpl');
 //set block
 $t->setBlock('individu', 'individu_card', 'individu_ref');
 
