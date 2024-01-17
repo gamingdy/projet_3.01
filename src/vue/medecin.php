@@ -1,21 +1,33 @@
 <?php
-if (isset($_GET['id'])) {
-    require_once __DIR__ . '/../dao/dao-usager.class.php';
-    require_once __DIR__ . '/../model/usager.class.php';
+require_once __DIR__ . '/../dao/dao-medecin.class.php';
+require_once __DIR__ . '/../model/medecin.class.php';
+$daoMedecin = new DaoMedecin();
 
-    $daoUsager = new DaoUsager();
-    $usager = $daoUsager->getUsager($_GET['id']);
-    if ($usager == null) {
+if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
+
+
+    $medecin = $daoMedecin->getMedecinById($_GET['id']);
+    if ($medecin == null) {
         header('Location: index.php');
         exit();
     }
 
     $template = new Smarty();
     $template->setTemplateDir(__DIR__ . '/../template/');
-    $template->assign('titre', $usager->getPrenom() . ' ' . $usager->getNom());
-    $template->assign('individu', $usager);
+    $template->assign('titre', $medecin->getPrenom() . ' ' . $medecin->getNom());
+    $template->assign('individu', $medecin);
     $template->assign('is_usager', false);
+    $template->assign('type', "Medecin");
     $template->display('individu.tpl');
+} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $id_medecin = $_GET['id'];
+    $medecin = $daoMedecin->getMedecinById($id_medecin);
+    $medecin->setPrenom($prenom);
+    $medecin->setNom($nom);
+    $daoMedecin->updateMedecin($medecin);
+    header('Location: medecins.php');
 } else {
     echo "non";
 }
