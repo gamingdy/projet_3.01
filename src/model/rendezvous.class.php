@@ -35,7 +35,7 @@ class RendezVous{
     public function getUsager (): Usager {
         return $this->_usager;
     }
-
+    
     public function getMedecin (): Medecin {
         return $this->_medecin;
     }

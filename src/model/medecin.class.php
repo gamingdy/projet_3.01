@@ -10,11 +10,11 @@ class Medecin extends Individu{
         parent::__construct($nom, $prenom, $civilite);
     }
 
-    public function setId (int $_id): void {
+    public function setIdMedecin (int $_id): void {
         $this->_id = $_id;
     }
 
-    public function getId (): int {
+    public function getIdMedecin (): int {
         return $this->_id;
     }
 
