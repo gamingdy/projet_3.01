@@ -46,4 +46,11 @@ class DaoIndividu{
         $stmt->bindValue(':id', $_individu->getId(), PDO::PARAM_INT);
         $stmt->execute();
     }
+
+    public function deleteIndividu (int $_id): void {
+        $sql = "DELETE FROM individu WHERE id = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':id', $_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
