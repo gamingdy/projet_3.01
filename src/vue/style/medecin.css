@@ -1,0 +1,37 @@
+input {
+    border-radius: 5px;
+    padding: 3%;
+}
+
+h1 {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.un_input {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+
+.modifiable {
+    display: flex;
+    flex-direction: column;
+}
+
+.non-modifiable {
+    display: flex;
+    flex-direction: column;
+}
+
+.un_input label {
+    padding-bottom: 2%;
+}
+
+.main {
+    background-color: rgba(128, 128, 128, 0.59);
+    padding: 5%;
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+}
