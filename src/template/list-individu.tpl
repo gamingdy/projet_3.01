@@ -3,13 +3,27 @@
 <head>
     <title>{$titre}</title>
     <link rel="stylesheet" href="style/list-usager.css">
+    <style>
+        .centered-button {
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 130px;
+        }
+
+        .big-button {
+            padding: 30px 60px;
+            font-size: 22px; /* Ajustez la taille de la police selon vos besoins */
+        }
+    </style>
 </head>
 <body>
 {include 'header.html'}
 
+<div class="centered-button">
+    <button class="big-button" onclick="window.location.href='/ajout.php'">Ajouter un usager</button>
+</div>
 {foreach $individus as $individu}
     <div class="card">
-        <img class='sex_icon' src='/img/{$individu->getCivilite()->toString()}.png' alt='test'>
 
         <p>Nom : {$individu->getNom()} </p>
         <p>Prenom : {$individu->getPrenom()} </p>

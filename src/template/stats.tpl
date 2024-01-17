@@ -51,11 +51,11 @@
     </tbody>
 </table>
 
-<h3>Informations sur les médecin</h3>
+<h3>Informations sur les médecins</h3>
 <table>
     <thead>
     <tr>
-        <th>Information médecin</th>
+        <th>Informations médecins</th>
         <th>Temps de consultation</th>
     </tr>
     </thead>
