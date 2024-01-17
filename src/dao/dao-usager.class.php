@@ -20,7 +20,7 @@ class DaoUsager{
 
     }
 
-    public function getUsager (int $_id): Usager | null {
+    public function getUsagerById (int $_id): Usager | null {
         $sql = "SELECT * FROM usager WHERE id = :id";
         $stmt = $this->_pdo->prepare($sql);
         $stmt->bindValue(':id', $_id, PDO::PARAM_INT);
@@ -42,14 +42,15 @@ class DaoUsager{
 
         $usager = new Usager($nom, $prenom, $civilite, $row['adresse'], $row['datenaissance'], $row['lieunaissance'], $row['securitesociale']);
         if ($id_medecin) {
-            $medecin_ref = $this->dao_medecin->getMedecin($id_medecin);
+            $medecin_ref = $this->dao_medecin->getMedecinById($id_medecin);
             $usager->setMedecinReferent($medecin_ref);
         }
-        $usager->setId($row['id']);
+        $usager->setIdUsager($row['id']);
+        $usager->setId($row['id_individu']);
         return $usager;
     }
 
-    public function getUsagers (): array {
+    public function getAllUsager (): array {
         $sql = "SELECT * FROM usager";
         $stmt = $this->_pdo->prepare($sql);
         $stmt->execute();
@@ -62,7 +63,7 @@ class DaoUsager{
         return $usagers;
     }
 
-    public function addUsager (Usager $_usager): void {
+    public function addUsager (Usager $_usager): int {
         $individu = new Individu($_usager->getNom(), $_usager->getPrenom(), $_usager->getCivilite());
         $individu_id = $this->dao_individu->addIndividu($individu);
         $medecin_ref = $_usager->getMedecinReferent();
@@ -76,6 +77,31 @@ class DaoUsager{
         $stmt->bindValue(':securiteSociale', $_usager->getSecuriteSociale());
         $stmt->bindValue(':id_medecin', $medecin_ref_id);
         $stmt->bindValue(':id_individu', $individu_id);
+        $stmt->execute();
+        return $this->_pdo->lastInsertId();
+    }
+
+    public function updateUsager (Usager $_usager): void {
+        $individu = new Individu($_usager->getNom(), $_usager->getPrenom(), $_usager->getCivilite());
+        $individu->setId($_usager->getId());
+        $this->dao_individu->updateIndividu($individu);
+        $medecin_ref = $_usager->getMedecinReferent();
+        $medecin_ref_id = $medecin_ref?->getId();
+
+        $sql = "UPDATE usager SET adresse = :adresse,  id_medecin = :id_medecin WHERE id = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':adresse', $_usager->getAdresse());
+        $stmt->bindValue(':id_medecin', $medecin_ref_id);
+        $stmt->bindValue(':id', $_usager->getIdUsager(), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function deleteUsager (Usager $usager): void {
+        $sql = "DELETE FROM usager WHERE id = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':id', $usager->getIdUsager(), PDO::PARAM_INT);
+        $stmt->execute();
+        $this->dao_individu->deleteIndividu($usager->getId());
     }
 
 }

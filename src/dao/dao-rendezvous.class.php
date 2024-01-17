@@ -17,7 +17,7 @@ class DaoRendezVous{
         $this->_daoMedecin = new DaoMedecin();
     }
 
-    public function getRendezVous (int $_id): RendezVous | null {
+    public function getRendezVousById (int $_id): RendezVous | null {
         $sql = "SELECT * FROM rendezvous WHERE id = :id";
         $stmt = $this->_pdo->prepare($sql);
         $stmt->bindValue(':id', $_id, PDO::PARAM_INT);
@@ -44,19 +44,30 @@ class DaoRendezVous{
 
     }
 
-    public function getRendezVousByUsager (int $_id): array {
+    public function getRendezVousByUsagerId (int $_id): array {
         $sql = "SELECT * FROM rendezvous WHERE id_usager = :id";
         return $this->rendezVousMedecinUsager($sql, $_id);
     }
 
-    public function getRendezVousByMedecin (int $_id): array {
+    public function getRendezVousByMedecinId (int $_id): array {
         $sql = "SELECT * FROM rendezvous WHERE id_medecin = :id";
         return $this->rendezVousMedecinUsager($sql, $_id);
     }
 
-    public function getRendezVousbyDate (string $_date): array {
+    public function getRendezVousByDate (string $_date): array {
         $sql = "SELECT * FROM rendezvous WHERE date_rdv = :date";
+        return $this->rendezVousDate($sql, $_date);
+    }
+
+    public function getRDVBeforeDate (string $_date): array {
+        $sql = "SELECT * FROM rendezvous WHERE date_rdv < :date";
+        return $this->rendezVousDate($sql, $_date);
+    }
+
+    public function getRDVBeforeDateByMedecinId (int $_id, string $_date): array {
+        $sql = "SELECT * FROM rendezvous WHERE id_medecin = :id AND date_rdv < :date";
         $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':id', $_id, PDO::PARAM_INT);
         $stmt->bindValue(':date', $_date);
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -67,6 +78,17 @@ class DaoRendezVous{
         return $rendezvous;
     }
 
+    public function getRDVTotalDureeByMedecinBeforeToday (): array {
+        $sql = "SELECT id_medecin,ROUND(SUM(dureeminutes)/60,2) AS total FROM rendezvous WHERE date_rdv<=CURDATE() GROUP BY id_medecin";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->execute();
+        $resultat = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $medecin = $this->_daoMedecin->getMedecinById($row["id_medecin"]);
+            $resultat[] = [$medecin, $row["total"]];
+        }
+        return $resultat;
+    }
 
     public function addRendezVous (RendezVous $_rendezvous): int {
         $sql = "INSERT INTO rendezvous (date_rdv,heure_debut,dureeminutes,id_medecin,id_usager) VALUES (:date,:heure,:duree,:id_medecin,:id_usager)";
@@ -93,11 +115,28 @@ class DaoRendezVous{
     }
 
     private function createRdv ($row): RendezVous {
-        $usager = $this->_daoUsager->getUsager($row['id_usager']);
-        $medecin = $this->_daoMedecin->getMedecin($row['id_medecin']);
+        $usager = $this->_daoUsager->getUsagerById($row['id_usager']);
+        $medecin = $this->_daoMedecin->getMedecinById($row['id_medecin']);
         $dateRDV = $row['date_rdv'];
         $heureRDV = $row['heure_debut'];
         $dureeMinutes = $row['dureeminutes'];
         return new RendezVous($usager, $medecin, $dateRDV, $heureRDV, $dureeMinutes);
+    }
+
+    /**
+     * @param string $sql
+     * @param string $_date
+     * @return array
+     */
+    public function rendezVousDate (string $sql, string $_date): array {
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':date', $_date);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rendezvous = [];
+        foreach ($rows as $row) {
+            $rendezvous[] = $this->createRdv($row);
+        }
+        return $rendezvous;
     }
 }
