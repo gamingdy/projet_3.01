@@ -9,12 +9,7 @@
 
 {foreach $individus as $individu}
     <div class="card">
-        {if $individu->getCivilite()->toString() == 'M'}
-            {$sexe = 'homme'}
-        {else}
-            {$sexe = 'femme'}
-        {/if}
-        <img class='sex_icon' src='/img/{$sexe}.png' alt='test'>
+        <img class='sex_icon' src='/img/{$individu->getCivilite()->toString()}.png' alt='test'>
 
         <p>Nom : {$individu->getNom()} </p>
         <p>Prenom : {$individu->getPrenom()} </p>
@@ -23,9 +18,9 @@
             <p>Adresse : {$individu->getAdresse()}</p>
             <p> Sécurité sociale : {$individu->getSecuriteSociale()}</p>
             <p> Date de naissance: {$individu->getDateNaissance()} </p>
-            <a href="/usager.php?id={$individu->getId()}">Voir</a>
+            <a href="/usager.php?id={$individu->getIdUsager()}">Voir</a>
         {else}
-            <a href="/medecin.php?id={$individu->getId()}">Voir</a>
+            <a href="/medecin.php?id={$individu->getIdMedecin()}">Voir</a>
         {/if}
 
 
