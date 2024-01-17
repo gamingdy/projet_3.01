@@ -37,4 +37,13 @@ class DaoIndividu{
         $stmt->execute();
         return $this->_pdo->lastInsertId();
     }
+
+    public function updateIndividu (Individu $_individu): void {
+        $sql = "UPDATE individu SET nom = :nom, prenom = :prenom WHERE id = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':nom', $_individu->getNom());
+        $stmt->bindValue(':prenom', $_individu->getPrenom());
+        $stmt->bindValue(':id', $_individu->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
