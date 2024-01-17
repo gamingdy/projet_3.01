@@ -7,7 +7,7 @@ require_once __DIR__ . '/../dao/dao-usager.class.php';
 require_once __DIR__ . '/../model/civilite.class.php';
 
 $daoUsager = new DaoUsager();
-$usager = $daoUsager->getUsagers();
+$usager = $daoUsager->getAllUsager();
 
 
 //create template object
