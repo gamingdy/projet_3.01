@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../dao/dao-rendezvous.class.php';
 require_once __DIR__ . '/../dao/dao-usager.class.php';
 require_once __DIR__ . '/../dao/dao-medecin.class.php';
+require_once __DIR__ . '/../model/custom-template.class.php';
 
 function getStat (array $sexe, Usager $usager) {
     $current_date = new DateTime();
@@ -36,11 +37,10 @@ foreach ($usagers as $usager) {
 }
 
 
-$template = new Smarty();
-$template->setTemplateDir(__DIR__ . '/../template/');
+$template = new CustomTemplate('stats.tpl');
 $template->assign('titre', 'Statistiques');
 $template->assign('femme_stat', $femme_stat);
 $template->assign('homme_stat', $homme_stat);
 $template->assign('medecins', $medecins);
 
-$template->display('stats.tpl');
+$template->show();

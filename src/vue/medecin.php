@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../dao/dao-medecin.class.php';
 require_once __DIR__ . '/../model/medecin.class.php';
+require_once __DIR__ . '/../model/custom-template.class.php';
 $daoMedecin = new DaoMedecin();
 
 if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
@@ -12,13 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])) {
         exit();
     }
 
-    $template = new Smarty();
-    $template->setTemplateDir(__DIR__ . '/../template/');
+    $template = new CustomTemplate('individu.tpl');
     $template->assign('titre', $medecin->getPrenom() . ' ' . $medecin->getNom());
     $template->assign('individu', $medecin);
     $template->assign('is_usager', false);
     $template->assign('type', "Medecin");
-    $template->display('individu.tpl');
+    $template->assign('erreur', '');
+    $template->show();
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
