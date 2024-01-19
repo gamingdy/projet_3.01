@@ -96,10 +96,17 @@ class DaoRendezVous{
         $stmt->bindValue(':date', $_rendezvous->getDateRDV());
         $stmt->bindValue(':heure', $_rendezvous->getHeureRDV());
         $stmt->bindValue(':duree', $_rendezvous->getDureeMinutes());
-        $stmt->bindValue(':id_medecin', $_rendezvous->getMedecin()->getId());
-        $stmt->bindValue(':id_usager', $_rendezvous->getUsager()->getId());
+        $stmt->bindValue(':id_medecin', $_rendezvous->getMedecin()->getIdMedecin());
+        $stmt->bindValue(':id_usager', $_rendezvous->getUsager()->getIdUsager());
         $stmt->execute();
         return $this->_pdo->lastInsertId();
+    }
+
+    public function deleteRendezVous (RendezVous $_rendezvous): void {
+        $sql = "DELETE FROM rendezvous WHERE id = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':id', $_rendezvous->getId());
+        $stmt->execute();
     }
 
     private function rendezVousMedecinUsager (string $sql, int $_id): array {
@@ -120,7 +127,9 @@ class DaoRendezVous{
         $dateRDV = $row['date_rdv'];
         $heureRDV = $row['heure_debut'];
         $dureeMinutes = $row['dureeminutes'];
-        return new RendezVous($usager, $medecin, $dateRDV, $heureRDV, $dureeMinutes);
+        $rendezvous = new RendezVous($usager, $medecin, $dateRDV, $heureRDV, $dureeMinutes);
+        $rendezvous->setId($row['id']);
+        return $rendezvous;
     }
 
     /**
@@ -128,7 +137,7 @@ class DaoRendezVous{
      * @param string $_date
      * @return array
      */
-    public function rendezVousDate (string $sql, string $_date): array {
+    private function rendezVousDate (string $sql, string $_date): array {
         $stmt = $this->_pdo->prepare($sql);
         $stmt->bindValue(':date', $_date);
         $stmt->execute();

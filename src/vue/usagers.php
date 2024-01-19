@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../controller/login.php';
 //we want to display this author list
 
 require_once __DIR__ . '/../model/custom-template.class.php';
@@ -15,6 +16,7 @@ $template = new CustomTemplate('list-individu.tpl');
 //load file
 $template->assign('titre', 'Liste des usagers');
 $template->assign('individus', $usager);
+$template->assign('type', "usagers");
 $template->assign('is_usager', true);
 
 //finish and echo

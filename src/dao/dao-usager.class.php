@@ -40,7 +40,7 @@ class DaoUsager{
 
         $id_medecin = $row['id_medecin'];
 
-        $usager = new Usager($nom, $prenom, $civilite, $row['adresse'], $row['datenaissance'], $row['lieunaissance'], $row['securitesociale']);
+        $usager = new Usager($nom, $prenom, $civilite, $row['adresse'], $row['datenaissance'], $row['securitesociale']);
         if ($id_medecin) {
             $medecin_ref = $this->dao_medecin->getMedecinById($id_medecin);
             $usager->setMedecinReferent($medecin_ref);
@@ -69,11 +69,10 @@ class DaoUsager{
         $medecin_ref = $_usager->getMedecinReferent();
         $medecin_ref_id = $medecin_ref?->getId();
 
-        $sql = "INSERT INTO usager (adresse, datenaissance, lieunaissance, securitesociale,id_medecin, id_individu) VALUES (:adresse, :dateNaissance, :lieuNaissance, :securiteSociale,:id_medecin, :id_individu)";
+        $sql = "INSERT INTO usager (adresse, datenaissance, securitesociale,id_medecin, id_individu) VALUES (:adresse, :dateNaissance, :securiteSociale,:id_medecin, :id_individu)";
         $stmt = $this->_pdo->prepare($sql);
         $stmt->bindValue(':adresse', $_usager->getAdresse());
         $stmt->bindValue(':dateNaissance', $_usager->getDateNaissance());
-        $stmt->bindValue(':lieuNaissance', $_usager->getLieuNaissance());
         $stmt->bindValue(':securiteSociale', $_usager->getSecuriteSociale());
         $stmt->bindValue(':id_medecin', $medecin_ref_id);
         $stmt->bindValue(':id_individu', $individu_id);

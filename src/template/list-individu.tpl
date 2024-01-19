@@ -3,43 +3,57 @@
 <head>
     <title>{$titre}</title>
     <link rel="stylesheet" href="style/list-usager.css">
-    <style>
-        .centered-button {
-            text-align: center;
-            margin-top: 10px;
-            margin-right: 130px;
-        }
+    <link rel="shortcut icon" type="image/png" href="img/logo.png">
 
-        .big-button {
-            padding: 30px 60px;
-            font-size: 22px; /* Ajustez la taille de la police selon vos besoins */
-        }
-    </style>
 </head>
 <body>
 {include 'header.html'}
 
-<div class="centered-button">
-    <button class="big-button" onclick="window.location.href='/ajout.php'">Ajouter un usager</button>
+<h1>Liste des {$type} </h1>
+<div class="conteneur">
+    {foreach $individus as $individu}
+        <div class="card">
+            <img class='sex_icon' src='/img/{$individu->getCivilite()->toString()}.png' alt='icone_personne'>
+
+            <p>Nom : {$individu->getNom()} </p>
+            <p>Prenom : {$individu->getPrenom()} </p>
+
+            {if $is_usager}
+                <p>Adresse : {$individu->getAdresse()}</p>
+                <p> Sécurité sociale : {$individu->getSecuriteSociale()}</p>
+                <p> Date de naissance: {$individu->getDateNaissance()} </p>
+                <div>
+                    <button class="bouton" onclick="window.location.href='/usager.php?id={$individu->getIdUsager()}'">
+                        Voir
+                    </button>
+                    <button class="bouton"
+                            onclick="window.location.href='/suppression.php?type=usager&id={$individu->getIdUsager()}'">
+                        Supprimer
+                    </button>
+                </div>
+            {else}
+                <div>
+                    <button class="bouton" onclick="window.location.href='/medecin.php?id={$individu->getIdMedecin()}'">
+                        Voir
+                    </button>
+                    <button class="bouton"
+                            onclick="window.location.href='/suppression.php?type=medecin&id={$individu->getIdMedecin()}'">
+                        Supprimer
+                    </button>
+                </div>
+            {/if}
+
+        </div>
+    {/foreach}
+
 </div>
-{foreach $individus as $individu}
-    <div class="card">
-
-        <p>Nom : {$individu->getNom()} </p>
-        <p>Prenom : {$individu->getPrenom()} </p>
-
-        {if $is_usager}
-            <p>Adresse : {$individu->getAdresse()}</p>
-            <p> Sécurité sociale : {$individu->getSecuriteSociale()}</p>
-            <p> Date de naissance: {$individu->getDateNaissance()} </p>
-            <a href="/usager.php?id={$individu->getIdUsager()}">Voir</a>
-        {else}
-            <a href="/medecin.php?id={$individu->getIdMedecin()}">Voir</a>
-        {/if}
-
-
+<div class="big-button">
+    <div class='bouton_ajout'>
+        <img onclick="window.location.href='/ajout.php?type={$type}'" src='/img/icons/ajouter.png' alt='bouton_ajout'>
     </div>
-{/foreach}
+</div>
+
+{include 'footer.html'}
 </body>
 </html>
 

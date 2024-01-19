@@ -35,12 +35,16 @@ class RendezVous{
     public function getUsager (): Usager {
         return $this->_usager;
     }
-    
+
     public function getMedecin (): Medecin {
         return $this->_medecin;
     }
 
     public function setId (int $id): void {
         $this->id = $id;
+    }
+
+    public function getId (): int {
+        return $this->id;
     }
 }

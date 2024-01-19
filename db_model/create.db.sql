@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS usager (
     id              INT AUTO_INCREMENT,
     adresse         VARCHAR(50),
     datenaissance   DATE,
-    lieunaissance   VARCHAR(50),
     securitesociale VARCHAR(13),
     id_medecin      INT,
     id_individu     INT NOT NULL,
@@ -42,6 +41,15 @@ CREATE TABLE IF NOT EXISTS rendezvous (
     FOREIGN KEY (id_usager) REFERENCES usager (id)
 );
 
+CREATE TABLE IF NOT EXISTS login (
+    id       INT AUTO_INCREMENT,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO login(username, password)
+VALUES ('admin', 'admin');
 
 INSERT INTO individu(nom, prenom, civilite)
 VALUES ('Doe', 'John', 'M'),
@@ -83,7 +91,7 @@ VALUES ('Doe', 'John', 'M'),
        ('Taylor', 'Henry', 'M'),
        ('Taylor', 'Lily', 'Mme'),
        ('Anderson', 'Andrew', 'M'),
-       ('Anderson', 'Ava', 'Mme');;
+       ('Anderson', 'Ava', 'Mme');
 
 
 
@@ -107,24 +115,24 @@ VALUES (1),
 ;
 
 
-INSERT INTO usager(adresse, datenaissance, lieunaissance, securitesociale, id_medecin, id_individu)
-VALUES ('2 rue de la paix', '1960-01-01', 'Paris', '1234567890124', NULL, 8),
-       ('10 Rue de la Liberté', '2000-05-15', 'Paris', '1234567890123', 1, 2),
-       ('25 Avenue des Roses', '1992-08-22', 'Lyon', '9876543210987', 2, 9),
-       ('8 Rue du Chêne', '1975-12-10', 'Marseille', '4567890123456', 3, 7),
-       ('15 Boulevard de la Plage', '1988-03-27', 'Nice', '7890123456789', NULL, 6),
-       ('5 Rue de la Paix', '1995-06-18', 'Toulouse', '2345678901234', NULL, 5),
-       ('4 Rue de la Paix', '1987-10-08', 'Paris', '1234567890125', NULL, 19),
-       ('18 Rue de la Liberté', '1994-03-20', 'Paris', '1234567890126', 7, 20),
-       ('28 Avenue des Roses', '1983-06-14', 'Lyon', '9876543210988', 9, 22),
-       ('14 Rue du Chêne', '1971-09-30', 'Marseille', '4567890123457', 11, 24),
-       ('21 Boulevard de la Plage', '1990-12-05', 'Nice', '7890123456780', NULL, 26),
-       ('3 Rue de la Paix', '1986-02-18', 'Toulouse', '2345678901235', NULL, 28),
-       ('8 Rue de la Liberté', '1992-05-01', 'Paris', '3456789012346', 6, 30),
-       ('22 Avenue des Roses', '1977-08-17', 'Lyon', '8765432109877', 8, 32),
-       ('10 Rue du Chêne', '1984-01-23', 'Marseille', '5678901234568', 10, 34),
-       ('25 Boulevard de la Plage', '1996-04-12', 'Nice', '8901234567891', NULL, 36),
-       ('6 Rue de la Paix', '1979-07-29', 'Toulouse', '3456709012346', NULL, 38);
+INSERT INTO usager(adresse, datenaissance, securitesociale, id_medecin, id_individu)
+VALUES ('2 rue de la paix', '1960-01-01', '1234567890124', NULL, 8),
+       ('10 Rue de la Liberté', '2000-05-15', '1234567890123', 1, 2),
+       ('25 Avenue des Roses', '1992-08-22', '9876543210987', 2, 9),
+       ('8 Rue du Chêne', '1975-12-10', '4567890123456', 3, 7),
+       ('15 Boulevard de la Plage', '1988-03-27', '7890123456789', NULL, 6),
+       ('5 Rue de la Paix', '1995-06-18', '2345678901234', NULL, 5),
+       ('4 Rue de la Paix', '1987-10-08', '1234567890125', NULL, 19),
+       ('18 Rue de la Liberté', '1994-03-20', '1234567890126', 7, 20),
+       ('28 Avenue des Roses', '1983-06-14', '9876543210988', 9, 22),
+       ('14 Rue du Chêne', '1971-09-30', '4567890123457', 11, 24),
+       ('21 Boulevard de la Plage', '1990-12-05', '7890123456780', NULL, 26),
+       ('3 Rue de la Paix', '1986-02-18', '2345678901235', NULL, 28),
+       ('8 Rue de la Liberté', '1992-05-01', '3456789012346', 6, 30),
+       ('22 Avenue des Roses', '1977-08-17', '8765432109877', 8, 32),
+       ('10 Rue du Chêne', '1984-01-23', '5678901234568', 10, 34),
+       ('25 Boulevard de la Plage', '1996-04-12', '8901234567891', NULL, 36),
+       ('6 Rue de la Paix', '1979-07-29', '3456709012346', NULL, 38);
 
 
 INSERT INTO rendezvous(date_rdv, heure_debut, dureeminutes, id_medecin, id_usager)

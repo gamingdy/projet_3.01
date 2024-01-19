@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png">
     <title>{$titre}</title>
     <style>
         table {
@@ -70,5 +71,6 @@
     </tbody>
 </table>
 
+{include "footer.html"}
 </body>
 </html>

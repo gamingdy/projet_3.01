@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../controller/login.php';
 require_once __DIR__ . '/../dao/dao-rendezvous.class.php';
 require_once __DIR__ . '/../dao/dao-usager.class.php';
 require_once __DIR__ . '/../dao/dao-medecin.class.php';

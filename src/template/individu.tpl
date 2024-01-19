@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png">
     <title>{$titre}</title>
     {if $is_usager}
         <link rel="stylesheet" href="style/usager.css">
@@ -17,6 +18,7 @@
     </style>
 </head>
 <body>
+
 {include 'header.html'}
 <h1>{$type} {$individu->getPrenom()} {$individu->getNom()}</h1>
 {if $is_usager}
@@ -83,7 +85,7 @@
     <p class="erreur">{$erreur}</p>
 </form>
 
-
+{include "footer.html"}
 </body>
 
 </html>

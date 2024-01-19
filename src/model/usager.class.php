@@ -5,15 +5,13 @@ class Usager extends Individu{
     private int $id_usager;
     private string $_adresse;
     private string $_dateNaissance;
-    private string $_lieuNaissance;
-    private int $_securiteSociale;
+    private string $_securiteSociale;
     private Medecin | null $_medecinReferent;
 
-    public function __construct ($_nom, $_prenom, $_civilite, $_adresse, $_dateNaissance, $_lieuNaissance, $_securiteSociale) {
+    public function __construct ($_nom, $_prenom, $_civilite, $_adresse, $_dateNaissance, $_securiteSociale) {
         parent::__construct($_nom, $_prenom, $_civilite);
         $this->_adresse = $_adresse;
         $this->_dateNaissance = $_dateNaissance;
-        $this->_lieuNaissance = $_lieuNaissance;
         $this->_securiteSociale = $_securiteSociale;
         $this->_medecinReferent = null;
     }
@@ -30,11 +28,12 @@ class Usager extends Individu{
         return $this->_dateNaissance;
     }
 
-    public function getLieuNaissance (): string {
-        return $this->_lieuNaissance;
+    public function setDateNaissance (string $_dateNaissance): void {
+        $this->_dateNaissance = $_dateNaissance;
     }
 
-    public function getSecuriteSociale (): int {
+
+    public function getSecuriteSociale (): string {
         return $this->_securiteSociale;
     }
 

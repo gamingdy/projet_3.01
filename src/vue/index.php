@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-</head>
-<body>
 <?php
-include_once(__DIR__ . '/../template/header.html');
+require_once __DIR__ . '/../controller/login.php';
+require_once __DIR__ . '/../model/custom-template.class.php';
+
+$template = new CustomTemplate('index.tpl');
+
+$template->assign('titre', 'Accueil');
+
+$template->show();
 
 
-?>
-</body>
-</html>
