@@ -4,7 +4,6 @@ require_once __DIR__ . '/../dao/dao-usager.class.php';
 require_once __DIR__ . '/../dao/dao-medecin.class.php';
 require_once __DIR__ . '/../dao/dao-rendezvous.class.php';
 
-
 function suppresionUsager (int $id): void {
     $daoUsager = new DaoUsager();
     $daoRdv = new DaoRendezVous();
@@ -22,6 +21,12 @@ function suppresionMedecin (int $id): void {
     $rdvs = $daoRdv->getRendezVousByMedecinId($id);
     foreach ($rdvs as $rdv) {
         $daoRdv->deleteRendezVous($rdv);
+    }
+    $daoUsager = new DaoUsager();
+    $usagers = $daoUsager->getUsagerByMedecinId($id);
+    foreach ($usagers as $usager) {
+        $usager->setMedecinReferent(null);
+        $daoUsager->updateUsager($usager);
     }
     $medecin = $daoMedecin->getMedecinById($id);
     $daoMedecin->deleteMedecin($medecin);

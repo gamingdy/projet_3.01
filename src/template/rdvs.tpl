@@ -32,7 +32,7 @@
                     <div class="info_medecin">
                         {assign var=medecin value=$rdv->getMedecin()}
                         <img class='icon_client' src='/img/icons/medecin.png' alt='icone_personne'>
-                        <p>{$medecin->getNom()} {$medecin->getPrenom()}</p>
+                        <p>{$medecin->getNom()|capitalize} {$medecin->getPrenom()}</p>
                     </div>
                     <div class="info_client">
                         {assign var=usager value=$rdv->getUsager()}
@@ -43,7 +43,6 @@
                 </div>
 
                 <div class="boutons_modif">
-                    <button>Modifier</button>
                     <button class="bouton"
                             onclick="window.location.href='/suppression.php?type=rdv&id={$rdv->getId()}'">Supprimer
                     </button>

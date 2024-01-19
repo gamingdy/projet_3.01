@@ -32,7 +32,7 @@ class DaoRendezVous{
     }
 
     public function getAllRendezVous (): array {
-        $sql = "SELECT * FROM rendezvous";
+        $sql = "SELECT * FROM rendezvous ORDER BY date_rdv,heure_debut";
         $stmt = $this->_pdo->prepare($sql);
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -52,30 +52,6 @@ class DaoRendezVous{
     public function getRendezVousByMedecinId (int $_id): array {
         $sql = "SELECT * FROM rendezvous WHERE id_medecin = :id";
         return $this->rendezVousMedecinUsager($sql, $_id);
-    }
-
-    public function getRendezVousByDate (string $_date): array {
-        $sql = "SELECT * FROM rendezvous WHERE date_rdv = :date";
-        return $this->rendezVousDate($sql, $_date);
-    }
-
-    public function getRDVBeforeDate (string $_date): array {
-        $sql = "SELECT * FROM rendezvous WHERE date_rdv < :date";
-        return $this->rendezVousDate($sql, $_date);
-    }
-
-    public function getRDVBeforeDateByMedecinId (int $_id, string $_date): array {
-        $sql = "SELECT * FROM rendezvous WHERE id_medecin = :id AND date_rdv < :date";
-        $stmt = $this->_pdo->prepare($sql);
-        $stmt->bindValue(':id', $_id, PDO::PARAM_INT);
-        $stmt->bindValue(':date', $_date);
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $rendezvous = [];
-        foreach ($rows as $row) {
-            $rendezvous[] = $this->createRdv($row);
-        }
-        return $rendezvous;
     }
 
     public function getRDVTotalDureeByMedecinBeforeToday (): array {
@@ -132,20 +108,4 @@ class DaoRendezVous{
         return $rendezvous;
     }
 
-    /**
-     * @param string $sql
-     * @param string $_date
-     * @return array
-     */
-    private function rendezVousDate (string $sql, string $_date): array {
-        $stmt = $this->_pdo->prepare($sql);
-        $stmt->bindValue(':date', $_date);
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $rendezvous = [];
-        foreach ($rows as $row) {
-            $rendezvous[] = $this->createRdv($row);
-        }
-        return $rendezvous;
-    }
 }

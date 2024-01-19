@@ -17,7 +17,12 @@ function validateNombre (string $number): bool {
 
 function validateDate ($date): bool {
     $d = DateTime::createFromFormat('d/m/Y', $date);
-    return $d && $d->format('d/m/Y') === $date;
+    if ($d) {
+        return $d && $d->format('d/m/Y') === $date;
+    }
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+
 }
 
 
@@ -27,23 +32,22 @@ function checkUsager (Usager $usager): ?string {
         return "Veuillez remplir tous les champs";
     }
     if (validateName($usager->getNom())) {
-        return "Nom invalide";
+        return "Nom invalide, veuillez entrer que des lettres";
     }
     if (validateName($usager->getPrenom())) {
-        return "Prénom invalide";
+        return "Prénom invalide, veuillez entrer que des lettres";
     }
     if (validateAdresse($usager->getAdresse())) {
-        return "Adresse invalide";
+        return "Adresse invalide, veuillez entrer que des lettres et des nombres";
     }
 
     if (validateNombre($usager->getSecuriteSociale())) {
-        return "Numéro de sécurité sociale invalide";
+        return "Numéro de sécurité sociale invalide, veuillez entrer que des nombres";
     }
 
     if (!validateDate($usager->getDateNaissance())) {
-        return "Date de naissance invalide";
+        return "Date de naissance invalide, le bon format est jj/mm/aaaa";
     }
-
     return null;
 }
 
@@ -52,10 +56,10 @@ function checkMedecin (Medecin $medecin): ?string {
         return "Veuillez remplir tous les champs";
     }
     if (validateName($medecin->getNom())) {
-        return "Format du nom invalide";
+        return "Nom invalide, veuillez entrer que des lettres";
     }
     if (validateName($medecin->getPrenom())) {
-        return "Format du prénom invalide";
+        return "Prénom invalide, veuillez entrer que des lettres";
     }
     return null;
 }

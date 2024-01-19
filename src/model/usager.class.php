@@ -41,9 +41,10 @@ class Usager extends Individu{
         return $this->_medecinReferent;
     }
 
-    public function setMedecinReferent (Medecin $_medecinReferent): void {
+    public function setMedecinReferent (?Medecin $_medecinReferent): void {
         $this->_medecinReferent = $_medecinReferent;
     }
+
 
     public function setIdUsager (int $id): void {
         $this->id_usager = $id;

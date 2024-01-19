@@ -11,7 +11,6 @@ enum Civilite: string{
             }
         }
         return null;
-
     }
 
     public function toString (): string {

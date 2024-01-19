@@ -84,55 +84,47 @@ VALUES ('Doe', 'John', 'M'),
        ('Jones', 'Sophie', 'Mme'),
        ('Davis', 'Jonathan', 'M'),
        ('Davis', 'Alice', 'Mme'),
-       ('Wilson', 'Robert', 'M'),
-       ('Wilson', 'Emma', 'Mme'),
-       ('Moore', 'Nicholas', 'M'),
-       ('Moore', 'Olivia', 'Mme'),
-       ('Taylor', 'Henry', 'M'),
-       ('Taylor', 'Lily', 'Mme'),
-       ('Anderson', 'Andrew', 'M'),
-       ('Anderson', 'Ava', 'Mme');
+       ('Wilson', 'Robert', 'M');
 
 
 
 INSERT INTO medecin(id_individu)
 VALUES (1),
+       (2),
        (3),
        (4),
        (5),
+       (6),
        (7),
+       (8),
        (9),
-       (11),
-       (13),
-       (15),
-       (17),
        (10),
+       (11),
        (12),
+       (13),
        (14),
-       (16),
-       (18),
-       (20);
-;
+       (15),
+       (16);
 
 
 INSERT INTO usager(adresse, datenaissance, securitesociale, id_medecin, id_individu)
-VALUES ('2 rue de la paix', '1960-01-01', '1234567890124', NULL, 8),
-       ('10 Rue de la Liberté', '2000-05-15', '1234567890123', 1, 2),
-       ('25 Avenue des Roses', '1992-08-22', '9876543210987', 2, 9),
-       ('8 Rue du Chêne', '1975-12-10', '4567890123456', 3, 7),
-       ('15 Boulevard de la Plage', '1988-03-27', '7890123456789', NULL, 6),
-       ('5 Rue de la Paix', '1995-06-18', '2345678901234', NULL, 5),
-       ('4 Rue de la Paix', '1987-10-08', '1234567890125', NULL, 19),
-       ('18 Rue de la Liberté', '1994-03-20', '1234567890126', 7, 20),
-       ('28 Avenue des Roses', '1983-06-14', '9876543210988', 9, 22),
-       ('14 Rue du Chêne', '1971-09-30', '4567890123457', 11, 24),
-       ('21 Boulevard de la Plage', '1990-12-05', '7890123456780', NULL, 26),
+VALUES ('2 rue de la paix', '1960-01-01', '1234567890124', NULL, 17),
+       ('10 Rue de la Liberté', '2000-05-15', '1234567890123', 1, 18),
+       ('25 Avenue des Roses', '1992-08-22', '9876543210987', 2, 19),
+       ('8 Rue du Chêne', '1975-12-10', '4567890123456', 3, 20),
+       ('15 Boulevard de la Plage', '1988-03-27', '7890123456789', NULL, 21),
+       ('5 Rue de la Paix', '1995-06-18', '2345678901234', NULL, 22),
+       ('4 Rue de la Paix', '1987-10-08', '1234567890125', NULL, 23),
+       ('18 Rue de la Liberté', '1994-03-20', '1234567890126', 7, 24),
+       ('28 Avenue des Roses', '1983-06-14', '9876543210988', 9, 25),
+       ('14 Rue du Chêne', '1971-09-30', '4567890123457', 11, 26),
+       ('21 Boulevard de la Plage', '1990-12-05', '7890123456780', NULL, 27),
        ('3 Rue de la Paix', '1986-02-18', '2345678901235', NULL, 28),
-       ('8 Rue de la Liberté', '1992-05-01', '3456789012346', 6, 30),
-       ('22 Avenue des Roses', '1977-08-17', '8765432109877', 8, 32),
-       ('10 Rue du Chêne', '1984-01-23', '5678901234568', 10, 34),
-       ('25 Boulevard de la Plage', '1996-04-12', '8901234567891', NULL, 36),
-       ('6 Rue de la Paix', '1979-07-29', '3456709012346', NULL, 38);
+       ('8 Rue de la Liberté', '1992-05-01', '3456789012346', 6, 29),
+       ('22 Avenue des Roses', '1977-08-17', '8765432109877', 8, 30),
+       ('10 Rue du Chêne', '1984-01-23', '5678901234568', 10, 31),
+       ('25 Boulevard de la Plage', '1996-04-12', '8901234567891', NULL, 32),
+       ('6 Rue de la Paix', '1979-07-29', '3456709012346', NULL, 33);
 
 
 INSERT INTO rendezvous(date_rdv, heure_debut, dureeminutes, id_medecin, id_usager)

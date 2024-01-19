@@ -4,7 +4,6 @@ require __DIR__ . '/../configuration.php';
 
 class Connexion{
     public static Connexion | null $_instance = null;
-
     private PDO $_pdo;
 
     private function __construct () {

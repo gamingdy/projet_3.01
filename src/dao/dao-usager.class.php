@@ -32,6 +32,20 @@ class DaoUsager{
         return null;
     }
 
+    public function getUsagerByMedecinId (int $id): array {
+        $sql = "SELECT * FROM usager WHERE id_medecin = :id";
+        $stmt = $this->_pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $usagers = [];
+        foreach ($rows as $row) {
+            $usager = $this->createUsager($row);
+            $usagers[] = $usager;
+        }
+        return $usagers;
+    }
+
     private function createUsager ($row): Usager {
         $individu = $this->dao_individu->getIndividu($row['id_individu']);
         $nom = $individu->getNom();

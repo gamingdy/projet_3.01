@@ -57,7 +57,7 @@
                 <div class="un_input">
                     <label for="anniv">Date de naissance :</label>
                     <input type="text" id="anniv" name="anniv" autocomplete="off"
-                           placeholder="dd/mm/YYYY">
+                           placeholder="jj/mm/AAAA">
                 </div>
             </div>
         {/if}

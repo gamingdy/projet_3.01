@@ -42,13 +42,6 @@ select {
     margin: auto;
 }
 
-.boutons {
-    padding: 1%;
-    display: flex;
-    position: absolute;
-    bottom: 20px;
-    right: 50px;
-}
 
 .main {
     position: relative;
