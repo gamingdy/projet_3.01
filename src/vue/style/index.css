@@ -13,6 +13,10 @@ a {
     color: black;
 }
 
+.main a {
+    color: black;
+}
+
 .main {
     width: 50%;
     margin: auto;
