@@ -1,0 +1,44 @@
+h1 {
+    margin-top: 2%;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.main a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.main a {
+    color: black;
+}
+
+.main {
+    width: 50%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.icon {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.item {
+    padding: 5%;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.item:hover {
+    background-color: rgba(51, 51, 51, 0.52);
+
+}
